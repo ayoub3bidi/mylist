@@ -15,7 +15,8 @@
                                 <input type="password" class="form-control" placeholder="Password" v-model="password">
                             </div>
                             <div v-if="error" class="text-danger">{{ error }}</div>
-                            <button style="margin: 25px;" class="btn btn-primary">Login</button>
+                            <button v-if="!isPending" style="margin: 25px;" class="btn btn-primary">Login</button>
+                            <button v-if="isPending" disabled style="margin: 25px;" class="btn btn-primary">Loading...</button>
                             <button style="margin: 25px;" class="btn btn-secondary">Create an account</button>
                         </form>
                     </div>
@@ -33,7 +34,7 @@ import { ref } from '@vue/reactivity'
 
     export default {
         setup() {
-            const { error, login } = useLogin()
+            const { error, login, isPending } = useLogin()
 
             const email = ref('')
             const password = ref('')
@@ -45,7 +46,7 @@ import { ref } from '@vue/reactivity'
                 }
             }
 
-            return { email, password, handleSubmit, error }
+            return { email, password, handleSubmit, error, isPending }
 
 
         }

@@ -25,7 +25,7 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <img class="img-fluid" src="https://scontent.ftun6-1.fna.fbcdn.net/v/t1.15752-9/203713869_1239637779828372_4566266272145639626_n.png?_nc_cat=106&ccb=1-3&_nc_sid=ae9488&_nc_ohc=7MN7I0JPonEAX9n5uk_&_nc_ht=scontent.ftun6-1.fna&oh=a43a17cd8618f555da5352f471e61b08&oe=60D7EBA0" alt="connect">
+                <img class="img-fluid" src="https://i.ibb.co/rZ6LdFQ/undraw-Connected-re-lmq2.png" alt="connect">
                 <h6 class="display-4 text-center">Create and share your lists about anything you like.</h6>
             </div>
 </template>

@@ -6,7 +6,7 @@ const isPending = ref(false)
 
 const signup = async (email, password, displayName) => {
   error.value = null
-  isPending = true
+  isPending.value = true
 
   try {
     const res = await projectAuth.createUserWithEmailAndPassword(email, password)
@@ -15,19 +15,19 @@ const signup = async (email, password, displayName) => {
     }
     await res.user.updateProfile({ displayName })
     error.value = null
-    isPending = false
+    isPending.value = false
     
     return res
   }
   catch(err) {
     console.log(err.message)
     error.value = err.message
-    isPending = false
+    isPending.value = false
   }
 }
 
 const useSignup = () => {
-  return { error, signup, isPending}
+  return { error, signup, isPending }
 }
 
 export default useSignup

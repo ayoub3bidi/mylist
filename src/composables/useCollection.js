@@ -9,7 +9,7 @@ const useCollection = (collection) => {
   // add a new document
   const addDoc = async (doc) => {
     error.value = null
-    isPending = true
+    isPending.value = true
 
     try {
       await projectFirestore.collection(collection).add(doc)
@@ -18,7 +18,7 @@ const useCollection = (collection) => {
     catch(err) {
       console.log(err.message)
       error.value = 'could not send the message'
-      isPending = false
+      isPending.value = false
     }
   }
 

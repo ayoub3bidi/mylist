@@ -30,7 +30,7 @@
                 </ul>
             </div>
             <div class="col-lg-1">
-                <button type="button" class="btn btn-outline-light text-light">Logout</button>
+                <button @click="handleClick" type="button" class="btn btn-outline-light text-light">Logout</button>
             </div>
         </div>
 
@@ -38,9 +38,23 @@
 </template>
 
 <script>
-    export default {
+import useLogout from '@/composables/useLogout'
+import { useRouter } from 'vue-router'
 
+export default {
+    setup() {
+        const { logout } = useLogout()
+        const router = useRouter()
+
+        const handleClick = async () => {
+            await logout()
+            console.log('user logged out')
+            router.push({ name: 'Login' })
+        }
+
+        return { handleClick }
     }
+}
 </script>
 
 <style>

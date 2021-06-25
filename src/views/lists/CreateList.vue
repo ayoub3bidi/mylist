@@ -16,10 +16,11 @@
                     </div>
                     <div class="form-group">
                         <label>Upload list cover image</label>
-                        <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                        <input type="file" class="form-control-file" @change="handleChange" >
+                        <div class="text-danger">{{ fileError }}</div>
                     </div>
-                    <div v-if="error" class="text-danger">{{ error }}</div>
-                    <button type="button" class="btn btn-outline-dark">Create</button>
+                    <div class="text-danger"></div>
+                    <button class="btn btn-outline-dark">Create</button>
                 </form>
             </div>
         </div>
@@ -27,18 +28,38 @@
 </template>
 
 <script>
-import { ref } from '@vue/reactivity'
+import {ref} from 'vue'
 
     export default {
         setup() {
             const title = ref('')
             const description = ref('')
+            const file = ref(null)
+            const fileError = ref(null)
 
-            const handleSubmit = async () => {
-                console.log(title.value, description.value)
+            const handleSubmit = () => {
+                if (file.value) {
+                    console.log(title.value, description.value, file.value)
+                }
             }
 
-            return { title, description }
+            // allowed file types
+            const types = ['image/png', 'image/jpeg']
+
+            const handleChange = (e) => {
+                const selected = e.target.files[0]
+                console.log(selected)
+
+                if (selected && types.includes(selected.type)) {
+                    file.value = selected
+                    fileError.value = null
+                } else {
+                    file.value = null
+                    fileError.value = 'Please select an image file (png or jpg)'
+                }
+            }
+
+            return { title, description, handleSubmit, handleChange, fileError }
         }
     }
 </script>

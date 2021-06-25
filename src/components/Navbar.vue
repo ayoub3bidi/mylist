@@ -16,7 +16,7 @@
 
         <!-- Navbar links -->
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
-            <div class="col-lg-11">
+            <div v-if="user" class="col-lg-11">
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="#">Create List</a>
@@ -29,7 +29,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-lg-1">
+            <div v-if="user" class="col-lg-1">
                 <button @click="handleClick" type="button" class="btn btn-outline-light text-light">Logout</button>
             </div>
         </div>
@@ -39,10 +39,12 @@
 
 <script>
 import useLogout from '@/composables/useLogout'
+import getUser from '@/composables/getUser'
 import { useRouter } from 'vue-router'
 
 export default {
     setup() {
+        const { user } = getUser()
         const { logout } = useLogout()
         const router = useRouter()
 
@@ -52,7 +54,7 @@ export default {
             router.push({ name: 'Login' })
         }
 
-        return { handleClick }
+        return { handleClick, user }
     }
 }
 </script>

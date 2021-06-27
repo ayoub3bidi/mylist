@@ -20,7 +20,8 @@
                         <div class="text-danger">{{ fileError }}</div>
                     </div>
                     <div class="text-danger"></div>
-                    <button class="btn btn-outline-dark">Create</button>
+                    <button v-if="!isPending" class="btn btn-outline-dark">Create</button>
+                    <button v-else disabled class="btn btn-outline-dark">Saving...</button>
                 </form>
             </div>
         </div>
@@ -30,20 +31,40 @@
 <script>
 import {ref} from 'vue'
 import useStorage from '@/composables/useStorage'
+import useCollection from '@/composables/useCollection'
+import getUser from '@/composables/getUser'
+import { timestamp } from '@/firebase/config'
 
     export default {
         setup() {
-            const { filePath, url, uploadImage } = useStorage() 
+            const { filePath, url, uploadImage } = useStorage()
+            const { error, addDoc } = useCollection('Lists')
+            const { user } = getUser()
 
             const title = ref('')
             const description = ref('')
             const file = ref(null)
             const fileError = ref(null)
+            const isPending = ref(false)
 
             const handleSubmit = async () => {
                 if (file.value) {
+                    isPending.value = true
                     await uploadImage(file.value)
-                    console.log('image uploaded, url:', url.value)
+                    await addDoc({
+                        title: title.value,
+                        description: description.value,
+                        userId: user.value.uid,
+                        userName: user.value.displayName,
+                        coverUrl: url.value,
+                        filePath: filePath.value,
+                        items: [],
+                        createdAt: timestamp() 
+                    })
+                    isPending.value = false
+                    if (!error.value) {
+                        console.log('List added')
+                    }
                 }
             }
 
@@ -63,7 +84,7 @@ import useStorage from '@/composables/useStorage'
                 }
             }
 
-            return { title, description, handleSubmit, handleChange, fileError }
+            return { title, description, handleSubmit, handleChange, fileError, isPending }
         }
     }
 </script>

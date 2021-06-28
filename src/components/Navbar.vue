@@ -19,13 +19,13 @@
             <div v-if="user" class="col-lg-11">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Create List</a>
+                        <router-link class="nav-link" to="/lists/create">Create List</router-link>
                     </li>
+                    <!-- <li class="nav-item">
+                        <router-link class="nav-link" to="/lists/create">My Lists</router-link>
+                    </li> -->
                     <li class="nav-item">
-                        <a class="nav-link" href="#">My lists</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Hi there, {{Name}} </a>
+                        <a class="nav-link">Hi there, {{ user.displayName }} </a>
                     </li>
                 </ul>
             </div>

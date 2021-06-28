@@ -3,6 +3,7 @@ import Home from '../views/Home.vue'
 import Login from '../views/auth/Login.vue'
 import Signup from '../views/auth/Signup.vue'
 import CreateList from '../views/lists/CreateList.vue'
+import ListDetails from '../views/lists/ListDetails.vue'
 
 // route guard
 import { projectAuth } from '../firebase/config'
@@ -38,6 +39,13 @@ const routes = [
     name: 'CreateList',
     component: CreateList,
     beforeEnter: requireAuth
+  },
+  {
+    path: '/lists/:id',
+    name: 'ListDetails',
+    component: ListDetails,
+    beforeEnter: requireAuth,
+    props: true
   }
 ]
 

@@ -1,23 +1,25 @@
 <template>
     <div v-for="List in Lists" :key="List.id">
         <br>
-        <div class="card">
+          <div class="card">
             <div class="card-body">
+                <router-link class="nav-link" :to="{ name: 'ListDetails', params: { id: List.id } }">
                 <div class="single">
                     <div class="thumbnail">
                         <img :src="List.coverUrl">
                     </div>
                     <div class="info">
-                        <h3>{{List.title}}</h3>
-                        <p>{{List.description}}</p>
-                        <p>Created by {{List.userName}}</p>
+                        <h3 style="color: black">{{List.title}}</h3>
+                        <p style="color: black">{{List.description}}</p>
+                        <p style="color: black">Created by {{List.userName}}</p>
                     </div>
                     <div class="item-number">
                         <p>{{List.items.length}}</p>
                     </div>
                 </div>
+                </router-link>
             </div>
-        </div>
+          </div>
     </div>
 </template>
 

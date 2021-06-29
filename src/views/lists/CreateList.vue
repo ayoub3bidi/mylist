@@ -34,6 +34,7 @@ import useStorage from '@/composables/useStorage'
 import useCollection from '@/composables/useCollection'
 import getUser from '@/composables/getUser'
 import { timestamp } from '@/firebase/config'
+import { useRouter } from 'vue-router'
 
     export default {
         setup() {
@@ -46,12 +47,13 @@ import { timestamp } from '@/firebase/config'
             const file = ref(null)
             const fileError = ref(null)
             const isPending = ref(false)
+            const router = useRouter()
 
             const handleSubmit = async () => {
                 if (file.value) {
                     isPending.value = true
                     await uploadImage(file.value)
-                    await addDoc({
+                    const res = await addDoc({
                         title: title.value,
                         description: description.value,
                         userId: user.value.uid,
@@ -63,7 +65,7 @@ import { timestamp } from '@/firebase/config'
                     })
                     isPending.value = false
                     if (!error.value) {
-                        console.log('List added')
+                        router.push({ name: 'ListDetails', params: { id: res.id } })
                     }
                 }
             }

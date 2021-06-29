@@ -30,7 +30,7 @@
                 </ul>
             </div>
             <div v-if="user" class="col-lg-1">
-                <button @click="handleClick" type="button" class="btn btn-outline-light text-light">Logout</button>
+                <button @click="handleClick" type="button" class="btn btn-outline-light">Logout</button>
             </div>
         </div>
 
@@ -38,25 +38,36 @@
 </template>
 
 <script>
-import useLogout from '@/composables/useLogout'
-import getUser from '@/composables/getUser'
-import { useRouter } from 'vue-router'
+    import useLogout from '@/composables/useLogout'
+    import getUser from '@/composables/getUser'
+    import {
+        useRouter
+    } from 'vue-router'
 
-export default {
-    setup() {
-        const { user } = getUser()
-        const { logout } = useLogout()
-        const router = useRouter()
+    export default {
+        setup() {
+            const {
+                user
+            } = getUser()
+            const {
+                logout
+            } = useLogout()
+            const router = useRouter()
 
-        const handleClick = async () => {
-            await logout()
-            console.log('user logged out')
-            router.push({ name: 'Login' })
+            const handleClick = async () => {
+                await logout()
+                console.log('user logged out')
+                router.push({
+                    name: 'Login'
+                })
+            }
+
+            return {
+                handleClick,
+                user
+            }
         }
-
-        return { handleClick, user }
     }
-}
 </script>
 
 <style>

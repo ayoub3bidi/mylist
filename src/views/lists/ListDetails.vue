@@ -5,12 +5,13 @@
     <!-- List information -->
     <div class="card">
       <div class="card-header">
+        <h4 class="text-center">{{ List.title }}</h4>
         <img class="img-fluid rounded" :src="List.coverUrl">
       </div>
-      <h4 class="text-center">{{ List.title }}</h4>
       <p class="text-center">Created by {{ List.userName }}</p>
-      <div class="card-footer">
-        <p class="text-center">{{ List.description }}</p>
+      <p class="text-center">{{ List.description }}</p>
+      <div class="card-footer text-center">
+        <button v-if="ownership" class="btn btn-outline-dark">Delete List</button>
       </div>
     </div>
   </div>
@@ -25,13 +26,19 @@
 
 <script>
 import getDocument from '@/composables/getDocument'
+import getUser from '@/composables/getUser'
+import { computed } from '@vue/runtime-core'
 
 export default {
     props: ['id'],
     setup(props) {
       const { error, document: List } = getDocument('Lists', props.id)
+      const { user } = getUser()
 
-      return { error, List }
+      const ownership = computed(() => {
+        return List.value && user.value && user.value.uid == List.value.userId
+      })
+      return { error, List, ownership }
     }
 }
 </script>

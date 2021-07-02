@@ -25,10 +25,12 @@
 </template>
 
 <script>
+import useStorage from '@/composables/useStorage'
 import useDocument from '@/composables/useDocument'
 import getDocument from '@/composables/getDocument'
 import getUser from '@/composables/getUser'
 import { computed } from '@vue/runtime-core'
+import { useRouter } from 'vue-router'
 
 export default {
     props: ['id'],
@@ -36,13 +38,17 @@ export default {
       const { error, document: List } = getDocument('Lists', props.id)
       const { user } = getUser()
       const { deleteDoc } = useDocument('Lists', props.id)
+      const { deleteImage } = useStorage()
+      const router = useRouter()
 
       const ownership = computed(() => {
         return List.value && user.value && user.value.uid == List.value.userId
       })
 
       const handleDelete = async () => {
+        await deleteImage(List.value.filePath)
         await deleteDoc()
+        router.push({ name: 'Home' })
       }
 
       return { error, List, ownership, handleDelete }

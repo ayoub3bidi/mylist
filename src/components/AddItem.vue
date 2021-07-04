@@ -22,11 +22,15 @@
 
 <script>
 import { ref } from '@vue/reactivity'
+import useDocument from '@/composables/useDocument'
+
     export default {
-        setup() {
+        props: ['List'],
+        setup(props) {
             const itemName = ref('')
             const author = ref('')
             const showForm = ref(false)
+            const { updateDoc } = useDocument('Lists', props.List.id)
 
             const handleSubmit = async () => {
                 const newItem = {
@@ -34,7 +38,11 @@ import { ref } from '@vue/reactivity'
                     author: author.value,
                     id: Math.floor(Math.random() * 1000000)
                 }
-                console.log(newItem)
+                await updateDoc({
+                    items: [...props.List.items, newItem]
+                })
+                itemName.value = ''
+                author.value = ''
             }
 
             return { itemName, author, showForm, handleSubmit }

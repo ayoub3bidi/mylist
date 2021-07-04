@@ -9,8 +9,8 @@
         <p style="margin: 10px" class="text-center">Created by {{ List.userName }}</p>
       </div>
       <p style="margin: 10px" class="text-center">{{ List.description }}</p>
-      <div class="card-footer text-center">
-        <button v-if="ownership" @click="handleDelete" class="btn btn-outline-dark">Delete List</button>
+      <div v-if="ownership" class="card-footer text-center">
+        <button @click="handleDelete" class="btn btn-outline-dark">Delete List</button>
       </div>
     </div>
   </div>

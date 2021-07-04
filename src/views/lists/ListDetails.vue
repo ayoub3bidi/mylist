@@ -17,28 +17,56 @@
   <div v-if="List" class="col-lg-9">
     <br>
     <!-- List items -->
+    <h5 v-if="!List.items.length">No items have been added to this list yet.</h5>
+    <div v-for="item in List.items" :key="item.id">
+      <div class="card">
+        <div class="card-body">
+          <blockquote class="blockquote float-left">
+            <p>{{ item.itemName }}</p>
+            <footer class="blockquote-footer">{{ item.author }}</footer>
+          </blockquote>
+          <button v-if="ownership" class="btn btn-outline-dark float-right">Delete</button>
+        </div>
+      </div>
+      <br>
+    </div>
     <AddItem v-if="ownership" :List="List" />
     <div v-if="error" class="text-danger">{{ error }}</div>
   </div>
 </template>
 
 <script>
-import AddItem from '@/components/AddItem.vue'
-import useStorage from '@/composables/useStorage'
-import useDocument from '@/composables/useDocument'
-import getDocument from '@/composables/getDocument'
-import getUser from '@/composables/getUser'
-import { computed } from '@vue/runtime-core'
-import { useRouter } from 'vue-router'
+  import AddItem from '@/components/AddItem.vue'
+  import useStorage from '@/composables/useStorage'
+  import useDocument from '@/composables/useDocument'
+  import getDocument from '@/composables/getDocument'
+  import getUser from '@/composables/getUser'
+  import {
+    computed
+  } from '@vue/runtime-core'
+  import {
+    useRouter
+  } from 'vue-router'
 
-export default {
+  export default {
     props: ['id'],
-    components: { AddItem },
+    components: {
+      AddItem
+    },
     setup(props) {
-      const { error, document: List } = getDocument('Lists', props.id)
-      const { user } = getUser()
-      const { deleteDoc } = useDocument('Lists', props.id)
-      const { deleteImage } = useStorage()
+      const {
+        error,
+        document: List
+      } = getDocument('Lists', props.id)
+      const {
+        user
+      } = getUser()
+      const {
+        deleteDoc
+      } = useDocument('Lists', props.id)
+      const {
+        deleteImage
+      } = useStorage()
       const router = useRouter()
 
       const ownership = computed(() => {
@@ -48,12 +76,19 @@ export default {
       const handleDelete = async () => {
         await deleteImage(List.value.filePath)
         await deleteDoc()
-        router.push({ name: 'Home' })
+        router.push({
+          name: 'Home'
+        })
       }
 
-      return { error, List, ownership, handleDelete }
+      return {
+        error,
+        List,
+        ownership,
+        handleDelete
+      }
     }
-}
+  }
 </script>
 
 <style>

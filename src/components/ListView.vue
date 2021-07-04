@@ -14,7 +14,7 @@
                         <p style="color: black">Created by {{List.userName}}</p>
                     </div>
                     <div class="item-number">
-                        <p>{{List.items.length}}</p>
+                        <p>{{List.items.length}} <span v-if="List.items.length == 1">item</span> <span v-if="List.items.length > 1">items</span></p>
                     </div>
                 </div>
                 </router-link>

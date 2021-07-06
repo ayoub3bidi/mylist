@@ -25,7 +25,7 @@
             <p>{{ item.itemName }}</p>
             <footer class="blockquote-footer">{{ item.author }}</footer>
           </blockquote>
-          <button v-if="ownership" class="btn btn-outline-dark float-right">Delete</button>
+          <button v-if="ownership" @click="handleClick(item.id)" class="btn btn-outline-dark float-right">Delete</button>
         </div>
       </div>
       <br>
@@ -50,23 +50,12 @@
 
   export default {
     props: ['id'],
-    components: {
-      AddItem
-    },
+    components: { AddItem },
     setup(props) {
-      const {
-        error,
-        document: List
-      } = getDocument('Lists', props.id)
-      const {
-        user
-      } = getUser()
-      const {
-        deleteDoc
-      } = useDocument('Lists', props.id)
-      const {
-        deleteImage
-      } = useStorage()
+      const { error, document: List } = getDocument('Lists', props.id)
+      const { user } = getUser()
+      const { deleteDoc, updateDoc } = useDocument('Lists', props.id)
+      const { deleteImage } = useStorage()
       const router = useRouter()
 
       const ownership = computed(() => {
@@ -76,17 +65,15 @@
       const handleDelete = async () => {
         await deleteImage(List.value.filePath)
         await deleteDoc()
-        router.push({
-          name: 'Home'
-        })
+        router.push({ name: 'Home' })
       }
 
-      return {
-        error,
-        List,
-        ownership,
-        handleDelete
+      const handleClick = async (id) => {
+        const items = List.value.items.filter((item) => item.id != id)
+        await updateDoc({ items }) 
       }
+
+      return { error, List, ownership, handleDelete, handleClick }
     }
   }
 </script>

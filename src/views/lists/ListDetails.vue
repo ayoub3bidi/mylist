@@ -17,7 +17,7 @@
   <div v-if="List" class="col-lg-9">
     <br>
     <!-- List items -->
-    <h5 v-if="!List.items.length">No items have been added to this list yet.</h5>
+    <h5 v-if="!List.items.length" class="text-muted">No items have been added to this list yet.</h5>
     <div v-for="item in List.items" :key="item.id">
       <div class="card">
         <div class="card-body">

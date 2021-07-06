@@ -21,9 +21,9 @@
                     <li class="nav-item">
                         <router-link class="nav-link" to="/lists/create">Create List</router-link>
                     </li>
-                    <!-- <li class="nav-item">
-                        <router-link class="nav-link" to="/lists/create">My Lists</router-link>
-                    </li> -->
+                    <li class="nav-item">
+                        <router-link class="nav-link" to="/lists/user">My Lists</router-link>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link">Hi there, {{ user.displayName }} </a>
                     </li>
@@ -69,7 +69,3 @@
         }
     }
 </script>
-
-<style>
-
-</style>

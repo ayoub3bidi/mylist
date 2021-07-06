@@ -25,7 +25,7 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <img class="img-fluid" src="https://i.ibb.co/rZ6LdFQ/undraw-Connected-re-lmq2.png" alt="connect">
+                <img class="img-fluid" src="https://i.ibb.co/WVHJ50G/undraw-Connected-re-lmq2-1.png" alt="connect">
                 <h6 class="display-4 text-center">Create and share your lists about anything you like.</h6>
             </div>
 </template>

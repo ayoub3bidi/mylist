@@ -24,4 +24,7 @@ export default {
 
 
 <style>
+body {
+ background-image: url("https://i.ibb.co/513DFTC/moroccan-flower.png");
+}
 </style>

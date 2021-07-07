@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button v-if="!showForm" class="btn btn-outline-dark" @click="showForm = true" >Add a new item</button>
+        <button v-if="!showForm" class="btn btn-outline-primary" @click="showForm = true" >Add a new item</button>
         <div v-if="showForm"  class="card">
             <div class="card-header">
                 <h3 class="display-4">Add a new item</h3>

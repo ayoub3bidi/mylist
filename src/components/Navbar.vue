@@ -16,7 +16,7 @@
 
         <!-- Navbar links -->
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
-            <div v-if="user" class="col-lg-11">
+            <div v-if="user" class="col-lg-10">
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <router-link class="nav-link" to="/lists/create">Create List</router-link>
@@ -24,13 +24,17 @@
                     <li class="nav-item">
                         <router-link class="nav-link" to="/lists/user">My Lists</router-link>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link">Hi there, {{ user.displayName }} </a>
-                    </li>
                 </ul>
             </div>
-            <div v-if="user" class="col-lg-1">
+            <div v-if="user" class="col-lg-2">
+                <div class="row">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                        <a class="nav-link" style="margin-right: 5px">Hi there, <span class="text-light">{{ user.displayName }}</span></a>
+                    </li>
+                    </ul>
                 <button @click="handleClick" type="button" class="btn btn-outline-light">Logout</button>
+                </div>
             </div>
         </div>
 

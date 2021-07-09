@@ -5,6 +5,7 @@ import Signup from '../views/auth/Signup.vue'
 import CreateList from '../views/lists/CreateList.vue'
 import ListDetails from '../views/lists/ListDetails.vue'
 import UserLists from '../views/lists/UserLists.vue'
+import NotFound from '../views/NotFound.vue'
 
 // route guard
 import { projectAuth } from '../firebase/config'
@@ -53,6 +54,11 @@ const routes = [
     name: 'UserLists',
     component: UserLists,
     beforeEnter: requireAuth
+  },
+  {
+    path: '/:catchAll(.*)',
+    name: 'NotFound',
+    component: NotFound
   }
 ]
 

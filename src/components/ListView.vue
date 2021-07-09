@@ -1,7 +1,7 @@
 <template>
     <div v-for="List in Lists" :key="List.id">
         <br>
-          <div class="card">
+            <div class="card">
             <div class="card-body">
                 <router-link class="nav-link" :to="{ name: 'ListDetails', params: { id: List.id } }">
                 <div class="single">

@@ -50,7 +50,3 @@ import useDocument from '@/composables/useDocument'
 
     }
 </script>
-
-<style>
-
-</style>

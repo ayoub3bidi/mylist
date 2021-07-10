@@ -27,4 +27,19 @@ export default {
 body {
  background-image: url("https://i.ibb.co/513DFTC/moroccan-flower.png");
 }
+div {
+    animation: transitionIn 0.75s;
+}
+
+@keyframes transitionIn {
+    from {
+        opacity: 0;
+        transform: rotateX(-10deg);
+    }
+
+    to {
+        opacity: 1;
+        transform: rotateX(0);
+    }
+}
 </style>

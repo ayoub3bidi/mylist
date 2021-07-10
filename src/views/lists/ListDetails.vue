@@ -72,7 +72,6 @@
         const items = List.value.items.filter((item) => item.id != id)
         await updateDoc({ items }) 
       }
-
       return { error, List, ownership, handleDelete, handleClick }
     }
   }

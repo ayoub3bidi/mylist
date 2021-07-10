@@ -57,7 +57,3 @@ import { useRouter } from 'vue-router'
         }
     }
 </script>
-
-<style>
-
-</style>

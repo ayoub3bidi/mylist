@@ -33,6 +33,14 @@
     <AddItem v-if="ownership" :List="List" />
     <div v-if="error" class="text-danger">{{ error }}</div>
   </div>
+  <div style="margin-top: 10px" class="col-lg-12">
+    <div class="card">
+      <div class="card-body">
+        <div id="disqus_thread"></div>
+        <noscript><a href="https://disqus.com/?ref_noscript"></a></noscript>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -72,6 +80,14 @@
         const items = List.value.items.filter((item) => item.id != id)
         await updateDoc({ items }) 
       }
+      
+      (function() {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://my-list.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+
       return { error, List, ownership, handleDelete, handleClick }
     }
   }
